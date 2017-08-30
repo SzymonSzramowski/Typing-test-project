@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row justify-content-center">
-    <input type="text" placeholder="Type your nickname here" class='form-control col-md-10'/>
-    <button class='btn btn-primary col-md-1'>Login</button>
+    <input #loginInput type="text" placeholder="Type your nickname here" class='form-control col-md-10' />
+    <button (click)='setNicknameAndLogin(loginInput.value)' class='btn btn-primary col-md-1'>Login</button>
   </div>
 </div>
