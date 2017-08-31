@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class LoginService {
     public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
-    public nickname: '';
+    public nickname = '';
 
-    public login(name): void {
+    public setLoginStatus(name: string): void {
         this.nickname = name;
         this.isLoggedIn.next(true);
     }

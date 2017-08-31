@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TestTextService {
+
+    private saveIndex: number;
+
     public testTextBase = {
         Easy: [
             'easy test paragraph1',
@@ -25,6 +28,11 @@ export class TestTextService {
 
     public getRandomTestText(difficulty: string): string {
         const randomIndex = Math.floor(Math.random() * this.testTextBase[difficulty].length);
-        return this.testTextBase[difficulty][randomIndex];
+        if (randomIndex === this.saveIndex) {
+            return this.getRandomTestText(difficulty);
+        } else {
+            this.saveIndex = randomIndex;
+            return this.testTextBase[difficulty][randomIndex];
+        }
     }
 }

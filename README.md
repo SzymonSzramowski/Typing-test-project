@@ -1,5 +1,9 @@
 # TypingTestProject
 
+This is Typing Test Project developed by Szymon Szramowski during Software Development Academy course. 
+
+// ToDo Application Instructions
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.7.
 
 ## Development server

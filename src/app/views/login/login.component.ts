@@ -13,8 +13,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  public setNicknameAndLogin(nickname) {
-    this.loginService.login(nickname);
+  public login(nickname) {
+    this.loginService.setLoginStatus(nickname);
   }
 
 }
