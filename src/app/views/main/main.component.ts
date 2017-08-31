@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TestTextService } from '../../services/test-text-service';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  public currentText = '';
+
+  constructor(public testTextService: TestTextService) {   }
+
 
   ngOnInit() {
+    this.generateText('Easy');
   }
 
+  public generateText(difficulty): void {
+    this.currentText = this.testTextService.getRandomTestText(difficulty);
+    console.log(this.currentText);
+  }
 }

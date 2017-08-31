@@ -1,7 +1,9 @@
 <div class="container">
 
   <div class="row">
-    <div class="paragraph col-md-12"></div>
+    <div class="testTextContainer col-md-12">
+      <span>{{ currentText }}</span>
+    </div>
   </div>
 
   <div class="row">
@@ -9,14 +11,14 @@
   </div>
 
   <div class="row justify-content-around">
-      <label for="selectDifficulty">Selected difficulty:</label>
-      <select class="form-control col-md-2" id="selectDifficulty">
+      <label>Selected difficulty:</label>
+      <select class="form-control col-md-2" #selectDifficulty>
         <option>Easy</option>
         <option>Medium</option>
         <option>Hard</option>
       </select>
 
-      <button class="generateNext btn btn-secondary col-md-3">Generate another paragraph</button>
+      <button (click)='generateText(selectDifficulty.value)' class="generateNext btn btn-secondary col-md-3">Generate another paragraph</button>
   </div>
 
   <div class="row row justify-content-center">
