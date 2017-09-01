@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
 
 
   ngOnInit() {
-    this.generateText('Easy');
+    this.generateText('easy');
   }
 
   public generateText(difficulty): void {

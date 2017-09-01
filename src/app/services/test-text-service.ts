@@ -6,19 +6,19 @@ export class TestTextService {
     private saveIndex: number;
 
     public testTextBase = {
-        Easy: [
+        easy: [
             'easy test paragraph1',
             'easy test paragraph2',
             'easy test paragraph3',
             'easy test paragraph4',
         ],
-        Medium: [
+        medium: [
             'medium test paragraph1',
             'medium test paragraph2',
             'medium test paragraph3',
             'medium test paragraph4',
         ],
-        Hard : [
+        hard : [
             'hard test paragraph1',
             'hard test paragraph2',
             'hard test paragraph3',

@@ -13,9 +13,9 @@
   <div class="row justify-content-around">
       <label>Selected difficulty:</label>
       <select class="form-control col-md-2" #selectDifficulty>
-        <option>Easy</option>
-        <option>Medium</option>
-        <option>Hard</option>
+        <option value='easy'>Easy</option>
+        <option value='medium'>Medium</option>
+        <option value='hard'>Hard</option>
       </select>
 
       <button (click)='generateText(selectDifficulty.value)' class="generateNext btn btn-secondary col-md-3">Generate another paragraph</button>
