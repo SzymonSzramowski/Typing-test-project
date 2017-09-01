@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TestTextService } from '../../services/test-text-service';
 
 @Component({
@@ -8,17 +8,28 @@ import { TestTextService } from '../../services/test-text-service';
 })
 export class MainComponent implements OnInit {
 
-  public currentText = '';
+  public currentTextArray = [];
 
-  constructor(public testTextService: TestTextService) {   }
+  public isInputDisabled = true;
 
+  public isTestInProgress = false;
+
+  constructor(
+    public testTextService: TestTextService,
+  ) {   }
 
   ngOnInit() {
     this.generateText('easy');
   }
 
   public generateText(difficulty): void {
-    this.currentText = this.testTextService.getRandomTestText(difficulty);
-    console.log(this.currentText);
+    const getText = this.testTextService.getRandomTestText(difficulty);
+    this.currentTextArray = getText.split(' ');
+    console.log(this.currentTextArray);
+  }
+
+  public startTest(): void {
+    this.isInputDisabled = false;
+    this.isTestInProgress = true;
   }
 }
