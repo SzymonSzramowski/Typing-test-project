@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { TextBaseSplit } from './text-base-interface';
 
 @Injectable()
 export class TestTextService {
 
     private saveIndex: number;
 
-    public testTextBase = {
+    private testTextBase = {
         easy: [
             'easy test paragraph1',
             'easy test paragraph2',
@@ -18,7 +19,7 @@ export class TestTextService {
             'medium test paragraph3',
             'medium test paragraph4',
         ],
-        hard : [
+        hard: [
             'hard test paragraph1',
             'hard test paragraph2',
             'hard test paragraph3',
@@ -26,13 +27,23 @@ export class TestTextService {
         ],
     };
 
-    public getRandomTestText(difficulty: string): string {
+    public randomizeText(difficulty: string): string {
+
         const randomIndex = Math.floor(Math.random() * this.testTextBase[difficulty].length);
         if (randomIndex === this.saveIndex) {
-            return this.getRandomTestText(difficulty);
+            return this.randomizeText(difficulty);
         } else {
             this.saveIndex = randomIndex;
             return this.testTextBase[difficulty][randomIndex];
         }
+    }
+
+    public getRandomText(difficulty: string) {
+        const textSplit: TextBaseSplit[] = [];
+        const randomText = this.randomizeText(difficulty).split(' ');
+        for (let i = 0; i < randomText.length; i++) {
+            textSplit.push({word: randomText[i], completed: false});
+        }
+        return textSplit;
     }
 }

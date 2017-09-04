@@ -6,6 +6,7 @@ import { LoginComponent } from './views/login/login.component';
 import { MainComponent } from './views/main/main.component';
 import { LoginService } from './services/login-service';
 import { TestTextService } from './services/test-text-service';
+import { ConsoleService } from './services/console-service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TestTextService } from './services/test-text-service';
   ],
   providers: [
     LoginService,
-    TestTextService
+    TestTextService,
+    ConsoleService,
   ],
   bootstrap: [AppComponent]
 })

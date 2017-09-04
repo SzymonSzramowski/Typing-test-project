@@ -4,7 +4,7 @@
     <div class="rewriteContainer col-md-7">
       <div class="row">
         <div class="testTextContainer col-md-12">
-          <span *ngFor='let text of this.currentTextArray'>{{ text }} </span>
+          <span *ngFor='let text of this.currentTextArray' [class.complete]="text.completed">{{ text.word }} </span>
         </div>
       </div>
     
@@ -13,20 +13,20 @@
       </div>
     </div>
     <div class="appConsole col-md-4">
-
+      <span *ngFor='let alert of consoleService.consoleArray'>{{ alert }}</span>
     </div>
   </div>
   
 
   <div class="row justify-content-around">
       <label>Selected difficulty:</label>
-      <select class="form-control col-md-2" #selectDifficulty>
+      <select (change)='generateText(selectDifficulty.value)' [disabled]=isTestInProgress class="form-control col-md-2" #selectDifficulty>
         <option value='easy'>Easy</option>
         <option value='medium'>Medium</option>
         <option value='hard'>Hard</option>
       </select>
 
-      <button (click)='generateText(selectDifficulty.value)' class="generateNext btn btn-secondary col-md-3">Generate another paragraph</button>
+      <button [disabled]=isTestInProgress (click)='generateText(selectDifficulty.value)' class="generateNext btn btn-secondary col-md-3">Generate another paragraph</button>
   </div>
 
   <div class="row justify-content-center">
