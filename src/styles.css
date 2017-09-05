@@ -14,6 +14,19 @@
     overflow-y: auto;
     max-height: 200px;
 }
+.consoleListContainer {
+    padding: 0 20px;
+    width: 100%;
+}
+.consoleMessage {
+    list-style: none;
+}
 .rewriteContainer input {
     background-color: #1e1e1e;
+}
+.btnStartText:before {
+    content: 'Start Test';
+}
+.btnStopText:before {
+    content: 'Stop Test';
 }

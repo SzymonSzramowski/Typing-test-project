@@ -13,7 +13,11 @@
       </div>
     </div>
     <div class="appConsole col-md-4">
-      <span *ngFor='let alert of consoleService.consoleArray'>{{ alert }}</span>
+      <ul class='consoleListContainer'>
+        <li *ngFor='let alert of consoleService.consoleArray.reverse()' class='consoleMessage'>
+            <span>{{ alert }}</span>
+        </li>
+      </ul>
     </div>
   </div>
   
@@ -30,6 +34,6 @@
   </div>
 
   <div class="row justify-content-center">
-    <button (click)='startTest()' class="startButton btn btn-success col-md-4">Start Test</button>
+    <button (click)='startTest()' [ngClass]="{'btn-success btnStartText': !isTestInProgress, 'btn-danger btnStopText': isTestInProgress}" class="btn col-md-4"></button>
   </div>
 </div>
