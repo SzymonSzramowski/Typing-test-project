@@ -33,3 +33,6 @@
 .btnStopText:before {
     content: 'Stop Test';
 }
+.complete {
+    color: rgb(0, 186, 49)
+}

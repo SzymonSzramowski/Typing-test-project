@@ -9,7 +9,7 @@
       </div>
 
       <div class="row">
-        <input #rewriteInput [disabled]=!isTestInProgress type="text" placeholder="Type text here" class="form-control col-md-12"
+        <input #rewriteInput on-keyup='checkWord($event.keyCode, rewriteInput.value)' [disabled]=!isTestInProgress type="text" placeholder="Type text here" class="form-control col-md-12"
         />
       </div>
     </div>
