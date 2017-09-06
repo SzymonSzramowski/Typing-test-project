@@ -11,8 +11,11 @@
 .appConsole {
     background-color: #1e1e1e;
     color: #e0e0e0;
-    overflow-y: auto;
+    overflow-y: hidden;
     max-height: 200px;
+}
+.appConsole:hover {
+    overflow-y: auto;
 }
 .consoleListContainer {
     padding: 0 20px;

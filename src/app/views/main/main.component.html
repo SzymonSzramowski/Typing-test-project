@@ -7,30 +7,31 @@
           <span *ngFor='let text of this.currentTextArray' [class.complete]="text.completed">{{ text.word }} </span>
         </div>
       </div>
-    
+
       <div class="row">
-        <input [disabled]=isInputDisabled type="text" placeholder="Type text here" class="form-control col-md-12" />
+        <input #rewriteInput [disabled]=!isTestInProgress type="text" placeholder="Type text here" class="form-control col-md-12"
+        />
       </div>
     </div>
     <div class="appConsole col-md-4">
       <ul class='consoleListContainer'>
         <li *ngFor='let alert of consoleService.consoleArray.reverse()' class='consoleMessage'>
-            <span>{{ alert }}</span>
+          <span>{{ alert }}</span>
         </li>
       </ul>
     </div>
   </div>
-  
+
 
   <div class="row justify-content-around">
-      <label>Selected difficulty:</label>
-      <select (change)='generateText(selectDifficulty.value)' [disabled]=isTestInProgress class="form-control col-md-2" #selectDifficulty>
+    <label>Selected difficulty:</label>
+    <select #selectDifficulty (change)='generateText(selectDifficulty.value)' [disabled]=isTestInProgress class="form-control col-md-2">
         <option value='easy'>Easy</option>
         <option value='medium'>Medium</option>
         <option value='hard'>Hard</option>
       </select>
 
-      <button [disabled]=isTestInProgress (click)='generateText(selectDifficulty.value)' class="generateNext btn btn-secondary col-md-3">Generate another paragraph</button>
+    <button (click)='generateText(selectDifficulty.value)' [disabled]=isTestInProgress class="generateNext btn btn-secondary col-md-3">Generate another paragraph</button>
   </div>
 
   <div class="row justify-content-center">

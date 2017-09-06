@@ -11,9 +11,10 @@ export class MainComponent implements OnInit {
 
   public currentTextArray = [];
 
-  public isInputDisabled = true;
-
   public isTestInProgress = false;
+
+  @ViewChild('rewriteInput')
+  public inputElement: ElementRef;
 
   constructor(
     public testTextService: TestTextService,
@@ -35,13 +36,12 @@ export class MainComponent implements OnInit {
   public startTest(): void {
     if (this.isTestInProgress === false) {
 
-      this.isInputDisabled = false;
       this.isTestInProgress = true;
+      setTimeout(() => this.inputElement.nativeElement.focus(), 0);
       this.consoleService.addAlertToArray('Starting test');
 
     } else {
 
-      this.isInputDisabled = true;
       this.isTestInProgress = false;
       this.consoleService.addAlertToArray('Test stopped');
 
