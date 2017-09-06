@@ -13,31 +13,37 @@ export class MainComponent implements OnInit {
 
   public isTestInProgress = false;
 
-  private wordIndexCounter: number;
+  private currentWordIndex: number;
 
   @ViewChild('rewriteInput')
   private inputElement: ElementRef;
 
   constructor(
+
     public testTextService: TestTextService,
     public consoleService: ConsoleService,
+
   ) { }
 
   ngOnInit() {
+
     this.generateText('easy');
+
   }
 
   public generateText(difficulty): void {
 
     const getText = this.testTextService.getRandomText(difficulty);
     this.currentTextArray = getText;
+
   }
 
-  public startTest(): void {
+  public setTestStatus(): void {
+
     if (this.isTestInProgress === false) {
 
       this.isTestInProgress = true;
-      this.wordIndexCounter = 0;
+      this.currentWordIndex = 0;
       setTimeout(() => this.inputElement.nativeElement.focus(), 0);
       this.consoleService.addAlertToArray('Starting test');
 
@@ -47,23 +53,32 @@ export class MainComponent implements OnInit {
       this.consoleService.addAlertToArray('Test stopped');
 
     }
-
   }
 
   public checkWord(keyCode, inputValue: string): void {
-    if (this.wordIndexCounter === this.currentTextArray.length - 1) {
-      if (inputValue === this.currentTextArray[this.wordIndexCounter].word) {
-        this.currentTextArray[this.wordIndexCounter].completed = true;
+
+    if (this.currentWordIndex === this.currentTextArray.length - 1) {
+      if (inputValue === this.currentTextArray[this.currentWordIndex].word) {
+        this.currentTextArray[this.currentWordIndex].completed = true;
         this.isTestInProgress = false;
         this.consoleService.addAlertToArray('Test completed');
-        this.wordIndexCounter = 0;
+        this.currentWordIndex = 0;
         this.inputElement.nativeElement.value = '';
+
       }
     }
-    if (inputValue === this.currentTextArray[this.wordIndexCounter].word + ' ') {
-      this.currentTextArray[this.wordIndexCounter].completed = true;
-      this.wordIndexCounter++;
+
+    if (inputValue === this.currentTextArray[this.currentWordIndex].word + ' ') {
+      this.currentTextArray[this.currentWordIndex].completed = true;
+      this.currentWordIndex++;
       this.inputElement.nativeElement.value = '';
+
     }
+
   }
+
+  public getConsoleAlerts() {
+    return this.consoleService.consoleArray.reverse();
+  }
+
 }

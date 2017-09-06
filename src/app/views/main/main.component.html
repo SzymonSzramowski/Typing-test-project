@@ -1,21 +1,21 @@
-<div class="container">
+<div class='container'>
 
-  <div class="row justify-content-between">
-    <div class="rewriteContainer col-md-7">
-      <div class="row">
-        <div class="testTextContainer col-md-12">
-          <span *ngFor='let text of this.currentTextArray' [class.complete]="text.completed">{{ text.word }} </span>
+  <div class='row justify-content-between'>
+    <div class='rewriteContainer col-md-7'>
+      <div class='row'>
+        <div class='testTextContainer col-md-12'>
+          <span *ngFor='let text of currentTextArray' [class.complete]='text.completed'>{{ text.word }} </span>
         </div>
       </div>
 
-      <div class="row">
-        <input #rewriteInput on-keyup='checkWord($event.keyCode, rewriteInput.value)' [disabled]=!isTestInProgress type="text" placeholder="Type text here" class="form-control col-md-12"
+      <div class='row'>
+        <input #rewriteInput on-keyup='checkWord($event.keyCode, rewriteInput.value)' [disabled]='!isTestInProgress' type='text' placeholder='Type text here' class='form-control col-md-12'
         />
       </div>
     </div>
-    <div class="appConsole col-md-4">
+    <div class='appConsole col-md-4'>
       <ul class='consoleListContainer'>
-        <li *ngFor='let alert of consoleService.consoleArray.reverse()' class='consoleMessage'>
+        <li *ngFor='let alert of getConsoleAlerts()' class='consoleMessage'>
           <span>{{ alert }}</span>
         </li>
       </ul>
@@ -23,18 +23,18 @@
   </div>
 
 
-  <div class="row justify-content-around">
+  <div class='row justify-content-around'>
     <label>Selected difficulty:</label>
-    <select #selectDifficulty (change)='generateText(selectDifficulty.value)' [disabled]=isTestInProgress class="form-control col-md-2">
+    <select #selectDifficulty (change)='generateText(selectDifficulty.value)' [disabled]='isTestInProgress' class='form-control col-md-2'>
         <option value='easy'>Easy</option>
         <option value='medium'>Medium</option>
         <option value='hard'>Hard</option>
       </select>
 
-    <button (click)='generateText(selectDifficulty.value)' [disabled]=isTestInProgress class="generateNext btn btn-secondary col-md-3">Generate another paragraph</button>
+    <button (click)='generateText(selectDifficulty.value)' [disabled]='isTestInProgress' class='generateNext btn btn-secondary col-md-3'>Generate another paragraph</button>
   </div>
 
-  <div class="row justify-content-center">
-    <button (click)='startTest()' [ngClass]="{'btn-success btnStartText': !isTestInProgress, 'btn-danger btnStopText': isTestInProgress}" class="btn col-md-4"></button>
+  <div class='row justify-content-center'>
+    <button (click)='setTestStatus()' [ngClass]='{"btn-success btnStartText": !isTestInProgress, "btn-danger btnStopText": isTestInProgress}' class='btn col-md-4'></button>
   </div>
 </div>
