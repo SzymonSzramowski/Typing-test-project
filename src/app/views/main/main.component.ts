@@ -45,12 +45,14 @@ export class MainComponent implements OnInit {
       this.isTestInProgress = true;
       this.currentWordIndex = 0;
       setTimeout(() => this.inputElement.nativeElement.focus(), 0);
-      this.consoleService.addAlertToArray('Starting test');
+      this.addConsoleAlert('Starting test');
 
     } else {
 
       this.isTestInProgress = false;
-      this.consoleService.addAlertToArray('Test stopped');
+      this.resetInput();
+      this.wordStatusReset();
+      this.addConsoleAlert('Test stopped');
 
     }
   }
@@ -61,9 +63,9 @@ export class MainComponent implements OnInit {
       if (inputValue === this.currentTextArray[this.currentWordIndex].word) {
         this.currentTextArray[this.currentWordIndex].completed = true;
         this.isTestInProgress = false;
-        this.consoleService.addAlertToArray('Test completed');
+        this.addConsoleAlert('Test completed');
         this.currentWordIndex = 0;
-        this.inputElement.nativeElement.value = '';
+        this.resetInput();
 
       }
     }
@@ -71,14 +73,28 @@ export class MainComponent implements OnInit {
     if (inputValue === this.currentTextArray[this.currentWordIndex].word + ' ') {
       this.currentTextArray[this.currentWordIndex].completed = true;
       this.currentWordIndex++;
-      this.inputElement.nativeElement.value = '';
+      this.resetInput();
 
     }
 
   }
 
-  public getConsoleAlerts() {
+  public getConsoleAlerts(): object {
     return this.consoleService.consoleArray.reverse();
+  }
+
+  private resetInput(): void {
+    this.inputElement.nativeElement.value = '';
+  }
+
+  private wordStatusReset(): void {
+    for (let i = 0; i < this.currentTextArray.length; i++) {
+      this.currentTextArray[i].completed = false;
+    }
+
+  }
+  private addConsoleAlert(text: string): void {
+    this.consoleService.addAlertToArray(text);
   }
 
 }
