@@ -13,10 +13,10 @@ export class MainComponent implements OnInit {
 
   public isTestInProgress = false;
 
-  public wordCounter: number;
+  private wordIndexCounter: number;
 
   @ViewChild('rewriteInput')
-  public inputElement: ElementRef;
+  private inputElement: ElementRef;
 
   constructor(
     public testTextService: TestTextService,
@@ -37,7 +37,7 @@ export class MainComponent implements OnInit {
     if (this.isTestInProgress === false) {
 
       this.isTestInProgress = true;
-      this.wordCounter = 0;
+      this.wordIndexCounter = 0;
       setTimeout(() => this.inputElement.nativeElement.focus(), 0);
       this.consoleService.addAlertToArray('Starting test');
 
@@ -51,18 +51,18 @@ export class MainComponent implements OnInit {
   }
 
   public checkWord(keyCode, inputValue: string): void {
-    if (this.wordCounter === this.currentTextArray.length - 1) {
-      if (inputValue === this.currentTextArray[this.wordCounter].word) {
-        this.currentTextArray[this.wordCounter].completed = true;
+    if (this.wordIndexCounter === this.currentTextArray.length - 1) {
+      if (inputValue === this.currentTextArray[this.wordIndexCounter].word) {
+        this.currentTextArray[this.wordIndexCounter].completed = true;
         this.isTestInProgress = false;
         this.consoleService.addAlertToArray('Test completed');
-        this.wordCounter = 0;
+        this.wordIndexCounter = 0;
         this.inputElement.nativeElement.value = '';
       }
     }
-    if (inputValue === this.currentTextArray[this.wordCounter].word + ' ') {
-      this.currentTextArray[this.wordCounter].completed = true;
-      this.wordCounter++;
+    if (inputValue === this.currentTextArray[this.wordIndexCounter].word + ' ') {
+      this.currentTextArray[this.wordIndexCounter].completed = true;
+      this.wordIndexCounter++;
       this.inputElement.nativeElement.value = '';
     }
   }
