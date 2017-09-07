@@ -13,6 +13,8 @@ export class MainComponent implements OnInit {
 
   public isTestInProgress = false;
 
+  public inputError = false;
+
   private currentWordIndex: number;
 
   @ViewChild('rewriteInput')
@@ -45,7 +47,7 @@ export class MainComponent implements OnInit {
       this.wordStatusReset();
       this.isTestInProgress = true;
       this.currentWordIndex = 0;
-      setTimeout(() => this.inputElement.nativeElement.focus(), 0);
+      setTimeout(() => this.lockInput(), 0);
       this.currentTextArray[0].current = true;
       this.addConsoleAlert('Starting test');
 
@@ -59,7 +61,7 @@ export class MainComponent implements OnInit {
     }
   }
 
-  public checkWord(keyCode, inputValue: string): void {
+  private checkWord(keyCode, inputValue: string): void {
 
     const isLastWord = this.currentWordIndex === this.currentTextArray.length - 1;
     const inputValueSufix = isLastWord ? '' : ' ';
@@ -83,9 +85,34 @@ export class MainComponent implements OnInit {
       this.currentTextArray[this.currentWordIndex].current = false;
       this.currentTextArray[this.currentWordIndex + 1].current = true;
       this.currentWordIndex++;
+      this.inputError = false;
       this.resetInput();
 
     }
+
+  }
+
+  public checkLetter(keyCode, inputValue: string): void {
+
+    const currentText = this.currentTextArray[this.currentWordIndex].word;
+
+    if (inputValue.length === currentText.length && inputValue === currentText.substring(0, inputValue.length)) {
+      this.currentTextArray[this.currentWordIndex].completed = true;
+
+    } else {
+      this.currentTextArray[this.currentWordIndex].completed = false;
+    }
+
+    if (inputValue !== currentText.substring(0, inputValue.length) && inputValue !== currentText + ' ') {
+      this.currentTextArray[this.currentWordIndex].error = true;
+      this.inputError = true;
+
+    } else if (inputValue === currentText.substring(0, inputValue.length)) {
+      this.currentTextArray[this.currentWordIndex].error = false;
+      this.inputError = false;
+    }
+
+    this.checkWord(keyCode, inputValue);
 
   }
 
@@ -105,8 +132,15 @@ export class MainComponent implements OnInit {
     }
 
   }
+
   private addConsoleAlert(text: string): void {
     this.consoleService.addAlertToArray(text);
+  }
+
+  public lockInput(): void {
+    if (this.isTestInProgress === true) {
+      this.inputElement.nativeElement.focus();
+    }
   }
 
 }

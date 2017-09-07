@@ -34,11 +34,16 @@
     content: 'Stop Test';
 }
 .error {
-    color: rgb(229, 0, 0);
+    color: #e50000;
 }
 .current {
     font-weight: bold;
 }
 .complete {
-    color: rgb(0, 186, 49)
+    color: #00ba31;
+}
+.inputError:focus {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
 }

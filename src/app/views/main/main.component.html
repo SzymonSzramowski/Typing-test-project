@@ -9,8 +9,8 @@
       </div>
 
       <div class='row'>
-        <input #rewriteInput on-keyup='checkWord($event.keyCode, rewriteInput.value)' [disabled]='!isTestInProgress' type='text' placeholder='Type text here' class='form-control col-md-12'
-        />
+        <input #rewriteInput on-keyup='checkLetter($event.keyCode, rewriteInput.value)' (blur)='lockInput()' [ngClass]='{"inputError": inputError}'
+          [disabled]='!isTestInProgress' type='text' placeholder='Type text here' class='form-control col-md-12' />
       </div>
     </div>
     <div class='appConsole col-md-4'>
@@ -35,6 +35,7 @@
   </div>
 
   <div class='row justify-content-center'>
-    <button (click)='setTestStatus()' [ngClass]='{"btn-success btnStartText": !isTestInProgress, "btn-danger btnStopText": isTestInProgress}' class='btn col-md-4'></button>
+    <button (click)='setTestStatus()' [ngClass]='{"btn-success btnStartText": !isTestInProgress, "btn-danger btnStopText": isTestInProgress}'
+      class='btn col-md-4'></button>
   </div>
 </div>

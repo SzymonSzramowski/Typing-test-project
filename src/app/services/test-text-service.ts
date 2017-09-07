@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { TextBaseSplit } from './text-base-interface';
 
@@ -23,7 +24,7 @@ export class TestTextService {
             'hard test paragraph1',
             'hard test paragraph2',
             'hard test paragraph3',
-            'hard test paragraph4',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum urna at enim ultrices blandit. Praesent ligula odio, bibendum eu imperdiet convallis, mollis quis ligula. Nulla condimentum vulputate odio a bibendum. Sed dapibus ligula felis. Cras hendrerit, nunc pretium ullamcorper luctus, ex ipsum aliquet mauris, eu mattis augue felis id enim. Cras eget rhoncus sapien. Cras ullamcorper risus id ipsum eleifend, a pharetra turpis tempor.',
         ],
     };
 
