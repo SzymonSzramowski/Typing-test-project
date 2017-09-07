@@ -42,9 +42,11 @@ export class MainComponent implements OnInit {
 
     if (this.isTestInProgress === false) {
 
+      this.wordStatusReset();
       this.isTestInProgress = true;
       this.currentWordIndex = 0;
       setTimeout(() => this.inputElement.nativeElement.focus(), 0);
+      this.currentTextArray[0].current = true;
       this.addConsoleAlert('Starting test');
 
     } else {
@@ -59,19 +61,27 @@ export class MainComponent implements OnInit {
 
   public checkWord(keyCode, inputValue: string): void {
 
-    if (this.currentWordIndex === this.currentTextArray.length - 1) {
-      if (inputValue === this.currentTextArray[this.currentWordIndex].word) {
-        this.currentTextArray[this.currentWordIndex].completed = true;
-        this.isTestInProgress = false;
-        this.addConsoleAlert('Test completed');
-        this.currentWordIndex = 0;
-        this.resetInput();
+    const isLastWord = this.currentWordIndex === this.currentTextArray.length - 1;
+    const inputValueSufix = isLastWord ? '' : ' ';
+    const isCurrentWordCorrect = inputValue === this.currentTextArray[this.currentWordIndex].word + inputValueSufix;
+    const spaceKeyCode = 32;
 
-      }
+    if (keyCode !== spaceKeyCode && !isLastWord) {
+      return;
     }
 
-    if (inputValue === this.currentTextArray[this.currentWordIndex].word + ' ') {
+    if (isLastWord && isCurrentWordCorrect) {
       this.currentTextArray[this.currentWordIndex].completed = true;
+      this.currentTextArray[this.currentWordIndex].current = false;
+      this.isTestInProgress = false;
+      this.addConsoleAlert('Test completed');
+      this.currentWordIndex = 0;
+      this.resetInput();
+
+    } else if (isCurrentWordCorrect) {
+      this.currentTextArray[this.currentWordIndex].completed = true;
+      this.currentTextArray[this.currentWordIndex].current = false;
+      this.currentTextArray[this.currentWordIndex + 1].current = true;
       this.currentWordIndex++;
       this.resetInput();
 
@@ -89,7 +99,9 @@ export class MainComponent implements OnInit {
 
   private wordStatusReset(): void {
     for (let i = 0; i < this.currentTextArray.length; i++) {
+      this.currentTextArray[i].current = false;
       this.currentTextArray[i].completed = false;
+      this.currentTextArray[i].error = false;
     }
 
   }

@@ -42,7 +42,7 @@ export class TestTextService {
         const textSplit: TextBaseSplit[] = [];
         const randomText = this.randomizeText(difficulty).split(' ');
         for (let i = 0; i < randomText.length; i++) {
-            textSplit.push({word: randomText[i], completed: false});
+            textSplit.push({word: randomText[i], current: false, completed: false, error: false});
         }
         return textSplit;
     }

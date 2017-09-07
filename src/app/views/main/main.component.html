@@ -4,7 +4,7 @@
     <div class='rewriteContainer col-md-7'>
       <div class='row'>
         <div class='testTextContainer col-md-12'>
-          <span *ngFor='let text of currentTextArray' [class.complete]='text.completed'>{{ text.word }} </span>
+          <span *ngFor='let text of currentTextArray' [ngClass]='{"current": text.current, "complete": text.completed, "error": text.error}'>{{ text.word }} </span>
         </div>
       </div>
 
