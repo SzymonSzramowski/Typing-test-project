@@ -10,32 +10,39 @@
 
       <div class='row'>
         <input #rewriteInput on-keyup='checkLetter($event.keyCode, rewriteInput.value)' (blur)='lockInput()' [ngClass]='{"inputError": inputError}'
-          [disabled]='!isTestInProgress' type='text' placeholder='Type text here' class='form-control col-md-12' />
+          [disabled]='!isTestInProgress' [readOnly]='isCountdownOn' type='text' placeholder='Type text here' class='typingInput form-control col-md-11'
+        />
       </div>
     </div>
-    <div class='appConsole col-md-4'>
-      <ul class='consoleListContainer'>
-        <li *ngFor='let alert of getConsoleAlerts()' class='consoleMessage'>
-          <span>{{ alert }}</span>
-        </li>
-      </ul>
+
+    <div class='sideMenu col-md-4'>
+      <div class="scores">
+        <div class="row">
+          <div ng-model='testTimer'>Test time: {{ getTimer() | date: 'mm:ss' }}</div>
+        </div>
+      </div>
+      <div class="appConsole row">
+        <ul class='consoleListContainer'>
+          <li *ngFor='let alert of getConsoleAlerts()' class='consoleMessage'>
+            <span>{{ alert }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="settings">
+        <div class="row">
+          <label>Choose difficulty:</label>
+          <select #selectDifficulty (change)='generateText(selectDifficulty.value)' [disabled]='isTestInProgress' class='form-control'>
+            <option value='easy'>Easy</option>
+            <option value='medium'>Medium</option>
+            <option value='hard'>Hard</option>
+          </select>
+        </div>
+        <div class="row justify-content-between">
+          <button (click)='setTestStatus()' [ngClass]='{"btn-success btnStartText": !isTestInProgress, "btn-danger btnStopText": isTestInProgress}'
+            class='btn col-md-5'></button>
+          <button (click)='generateText(selectDifficulty.value)' [disabled]='isTestInProgress' class='generateNext btn btn-secondary'>Next paragraph</button>
+        </div>
+      </div>
     </div>
-  </div>
-
-
-  <div class='row justify-content-around'>
-    <label>Selected difficulty:</label>
-    <select #selectDifficulty (change)='generateText(selectDifficulty.value)' [disabled]='isTestInProgress' class='form-control col-md-2'>
-        <option value='easy'>Easy</option>
-        <option value='medium'>Medium</option>
-        <option value='hard'>Hard</option>
-      </select>
-
-    <button (click)='generateText(selectDifficulty.value)' [disabled]='isTestInProgress' class='generateNext btn btn-secondary col-md-3'>Generate another paragraph</button>
-  </div>
-
-  <div class='row justify-content-center'>
-    <button (click)='setTestStatus()' [ngClass]='{"btn-success btnStartText": !isTestInProgress, "btn-danger btnStopText": isTestInProgress}'
-      class='btn col-md-4'></button>
   </div>
 </div>

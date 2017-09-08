@@ -7,6 +7,8 @@ import { MainComponent } from './views/main/main.component';
 import { LoginService } from './services/login-service';
 import { TestTextService } from './services/test-text-service';
 import { ConsoleService } from './services/console-service';
+import { TimerService } from './services/timer-service';
+import { ScoreService } from './services/score-service';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,9 @@ import { ConsoleService } from './services/console-service';
     LoginService,
     TestTextService,
     ConsoleService,
+    TimerService,
+    ScoreService,
+
   ],
   bootstrap: [AppComponent]
 })

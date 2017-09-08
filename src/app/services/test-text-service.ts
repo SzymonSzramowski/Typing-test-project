@@ -9,22 +9,22 @@ export class TestTextService {
 
     private testTextBase = {
         easy: [
-            'easy test paragraph1',
-            'easy test paragraph2',
-            'easy test paragraph3',
-            'easy test paragraph4',
+            "easy test paragraph1",
+            "easy test paragraph2",
+            "easy test paragraph3",
+            "easy test paragraph4",
         ],
         medium: [
-            'medium test paragraph1',
-            'medium test paragraph2',
-            'medium test paragraph3',
-            'medium test paragraph4',
+            "medium test paragraph1",
+            "medium test paragraph2",
+            "medium test paragraph3",
+            "medium test paragraph4",
         ],
         hard: [
-            'hard test paragraph1',
-            'hard test paragraph2',
-            'hard test paragraph3',
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum urna at enim ultrices blandit. Praesent ligula odio, bibendum eu imperdiet convallis, mollis quis ligula. Nulla condimentum vulputate odio a bibendum. Sed dapibus ligula felis. Cras hendrerit, nunc pretium ullamcorper luctus, ex ipsum aliquet mauris, eu mattis augue felis id enim. Cras eget rhoncus sapien. Cras ullamcorper risus id ipsum eleifend, a pharetra turpis tempor.',
+            "hard test paragraph1",
+            "hard test paragraph2",
+            "Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn't really do it, they just saw something. It seemed obvious to them after a while. That's because they were able to connect experiences they've had and synthesize new things.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum urna at enim ultrices blandit. Praesent ligula odio, bibendum eu imperdiet convallis, mollis quis ligula. Nulla condimentum vulputate odio a bibendum. Sed dapibus ligula felis. Cras hendrerit, nunc pretium ullamcorper luctus, ex ipsum aliquet mauris, eu mattis augue felis id enim. Cras eget rhoncus sapien. Cras ullamcorper risus id ipsum eleifend, a pharetra turpis tempor.",
         ],
     };
 

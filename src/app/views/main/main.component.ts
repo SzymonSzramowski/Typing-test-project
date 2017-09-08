@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Observable, Observer, Subscription } from 'rxjs/Rx';
+
 import { TestTextService } from '../../services/test-text-service';
 import { ConsoleService } from '../../services/console-service';
+import { TimerService } from '../../services/timer-service';
+import { ScoreService } from '../../services/score-service';
 
 @Component({
   selector: 'app-main',
@@ -13,6 +17,8 @@ export class MainComponent implements OnInit {
 
   public isTestInProgress = false;
 
+  public isCountdownOn = false;
+
   public inputError = false;
 
   private currentWordIndex: number;
@@ -22,8 +28,10 @@ export class MainComponent implements OnInit {
 
   constructor(
 
-    public testTextService: TestTextService,
-    public consoleService: ConsoleService,
+    private testTextService: TestTextService,
+    private consoleService: ConsoleService,
+    private timerService: TimerService,
+    private scoreService: ScoreService,
 
   ) { }
 
@@ -50,6 +58,8 @@ export class MainComponent implements OnInit {
       setTimeout(() => this.lockInput(), 0);
       this.currentTextArray[0].current = true;
       this.addConsoleAlert('Starting test');
+      this.timerService.startTimer();
+
 
     } else {
 
@@ -57,6 +67,7 @@ export class MainComponent implements OnInit {
       this.resetInput();
       this.wordStatusReset();
       this.addConsoleAlert('Test stopped');
+      this.timerService.stopTimer();
 
     }
   }
@@ -75,10 +86,7 @@ export class MainComponent implements OnInit {
     if (isLastWord && isCurrentWordCorrect) {
       this.currentTextArray[this.currentWordIndex].completed = true;
       this.currentTextArray[this.currentWordIndex].current = false;
-      this.isTestInProgress = false;
-      this.addConsoleAlert('Test completed');
-      this.currentWordIndex = 0;
-      this.resetInput();
+      this.testComplete();
 
     } else if (isCurrentWordCorrect) {
       this.currentTextArray[this.currentWordIndex].completed = true;
@@ -116,6 +124,14 @@ export class MainComponent implements OnInit {
 
   }
 
+  public testComplete(): void {
+    this.isTestInProgress = false;
+    this.timerService.stopTimer();
+    this.addConsoleAlert('Test completed');
+    this.currentWordIndex = 0;
+    this.resetInput();
+  }
+
   public getConsoleAlerts(): object {
     return this.consoleService.consoleArray.reverse();
   }
@@ -142,5 +158,10 @@ export class MainComponent implements OnInit {
       this.inputElement.nativeElement.focus();
     }
   }
+  private startCountdown(): void {
 
+  }
+  public getTimer(): number {
+    return this.timerService.timer * 1000;
+  }
 }

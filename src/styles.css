@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #3a3a3a;
+}
 .row{
     padding-top: 15px;
     padding-bottom: 15px;
@@ -7,12 +10,23 @@
     background-color: #1e1e1e;
     color: #e0e0e0;
 }
+.testTextContainer{
+    min-height: 340px;
+}
 
-.appConsole {
+.sideMenu {
     background-color: #1e1e1e;
     color: #e0e0e0;
+    height: 450px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.appConsole {
+    background-color: #3a3a3a;
     overflow-y: hidden;
-    max-height: 200px;
+    overflow-x: hidden;
+    overflow-wrap: none;
+    height: 200px;
 }
 .appConsole:hover {
     overflow-y: auto;
@@ -41,6 +55,18 @@
 }
 .complete {
     color: #00ba31;
+}
+.typingInput {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.typingInput:focus {
+    color: #fff;
+    background-color: #3a3a3a;
+}
+.typingInput:disabled {
+    color: #fff;
+    background-color: #1e1e1e;
 }
 .inputError:focus {
     background-color: #dc3545;
