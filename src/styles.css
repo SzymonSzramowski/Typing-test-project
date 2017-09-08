@@ -23,10 +23,9 @@ body {
 }
 .appConsole {
     background-color: #3a3a3a;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    overflow-wrap: none;
     height: 200px;
+    overflow-y: hidden;
+    display: flex;
 }
 .appConsole:hover {
     overflow-y: auto;
@@ -34,6 +33,8 @@ body {
 .consoleListContainer {
     padding: 0 20px;
     width: 100%;
+    margin-top: auto;
+    margin-bottom: inherit;
 }
 .consoleMessage {
     list-style: none;

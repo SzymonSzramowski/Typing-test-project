@@ -21,11 +21,11 @@
           <div ng-model='testTimer'>Test time: {{ getTimer() | date: 'mm:ss' }}</div>
         </div>
       </div>
-      <div class="appConsole row">
+      <div ngx-auto-scroll lock-y-offset="10" observe-attributes class="appConsole row">
         <ul class='consoleListContainer'>
-          <li *ngFor='let alert of getConsoleAlerts()' class='consoleMessage'>
-            <span>{{ alert }}</span>
-          </li>
+            <li *ngFor='let alert of getConsoleAlerts()' class='consoleMessage'>
+              <span>{{ alert }}</span>
+            </li>
         </ul>
       </div>
       <div class="settings">

@@ -23,6 +23,8 @@ export class MainComponent implements OnInit {
 
   private currentWordIndex: number;
 
+  private countdownSubscription: Subscription;
+
   @ViewChild('rewriteInput')
   private inputElement: ElementRef;
 
@@ -43,8 +45,7 @@ export class MainComponent implements OnInit {
 
   public generateText(difficulty): void {
 
-    const getText = this.testTextService.getRandomText(difficulty);
-    this.currentTextArray = getText;
+    this.currentTextArray = this.testTextService.getRandomText(difficulty);
 
   }
 
@@ -53,12 +54,12 @@ export class MainComponent implements OnInit {
     if (this.isTestInProgress === false) {
 
       this.wordStatusReset();
+      this.timerService.resetTimer();
       this.isTestInProgress = true;
       this.currentWordIndex = 0;
       setTimeout(() => this.lockInput(), 0);
       this.currentTextArray[0].current = true;
-      this.addConsoleAlert('Starting test');
-      this.timerService.startTimer();
+      this.startCountdown();
 
 
     } else {
@@ -66,6 +67,7 @@ export class MainComponent implements OnInit {
       this.isTestInProgress = false;
       this.resetInput();
       this.wordStatusReset();
+      this.stopCountdown();
       this.addConsoleAlert('Test stopped');
       this.timerService.stopTimer();
 
@@ -133,7 +135,7 @@ export class MainComponent implements OnInit {
   }
 
   public getConsoleAlerts(): object {
-    return this.consoleService.consoleArray.reverse();
+    return this.consoleService.consoleArray;
   }
 
   private resetInput(): void {
@@ -158,9 +160,30 @@ export class MainComponent implements OnInit {
       this.inputElement.nativeElement.focus();
     }
   }
-  private startCountdown(): void {
 
+  private startCountdown(): void {
+    this.isCountdownOn = true;
+    this.countdownSubscription = Observable.timer(0, 1000).subscribe((time: number) => {
+      // ToDo: Refactor 'else if' to switch
+      if (time === 0) {
+        this.addConsoleAlert('Starting test in 3...');
+      } else if (time === 1) {
+        this.addConsoleAlert('2...');
+      } else if (time === 2) {
+        this.addConsoleAlert('1...');
+      } else if (time === 3) {
+        this.isCountdownOn = false;
+        this.addConsoleAlert('GO!');
+        this.timerService.startTimer();
+      }
+    });
   }
+
+  private stopCountdown(): void {
+    this.countdownSubscription.unsubscribe();
+    this.isCountdownOn = false;
+  }
+
   public getTimer(): number {
     return this.timerService.timer * 1000;
   }

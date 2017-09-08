@@ -12,12 +12,16 @@ export class TimerService {
 
     public startTimer(): void {
         this.timer = 0;
-        this.subscription = this.timeInterval.subscribe((time: number) => {
+        this.subscription = this.timeInterval.subscribe(() => {
             this.timer++;
         });
     }
 
     public stopTimer(): void {
         this.subscription.unsubscribe();
+    }
+
+    public resetTimer(): void {
+        this.timer = 0;
     }
 }
