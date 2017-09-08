@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxAutoScroll } from 'ngx-auto-scroll/lib/ngx-auto-scroll.directive';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
@@ -14,7 +15,8 @@ import { ScoreService } from './services/score-service';
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    NgxAutoScroll
   ],
   imports: [
     BrowserModule

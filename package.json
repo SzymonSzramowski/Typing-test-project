@@ -23,6 +23,7 @@
     "@angular/router": "^4.0.0",
     "bootstrap": "^4.0.0-beta",
     "core-js": "^2.4.1",
+    "ngx-auto-scroll": "^1.0.15",
     "rxjs": "^5.4.1",
     "zone.js": "^0.8.14"
   },
