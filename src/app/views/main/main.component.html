@@ -1,28 +1,41 @@
-<div class="container">
+<div class='container'>
 
-  <div class="row">
-    <div class="testTextContainer col-md-12">
-      <span>{{ currentText }}</span>
+  <div class='row justify-content-between'>
+    <div class='rewriteContainer col-md-7'>
+      <div class='row'>
+        <div class='testTextContainer col-md-12'>
+          <span *ngFor='let text of currentTextArray' [ngClass]='{"current": text.current, "complete": text.completed, "error": text.error}'>{{ text.word }} </span>
+        </div>
+      </div>
+
+      <div class='row'>
+        <input #rewriteInput on-keyup='checkLetter($event.keyCode, rewriteInput.value)' (blur)='lockInput()' [ngClass]='{"inputError": inputError}'
+          [disabled]='!isTestInProgress' type='text' placeholder='Type text here' class='form-control col-md-12' />
+      </div>
+    </div>
+    <div class='appConsole col-md-4'>
+      <ul class='consoleListContainer'>
+        <li *ngFor='let alert of getConsoleAlerts()' class='consoleMessage'>
+          <span>{{ alert }}</span>
+        </li>
+      </ul>
     </div>
   </div>
 
-  <div class="row">
-    <input type="text" placeholder="Type text here" class="form-control col-md-12" />
-  </div>
 
-  <div class="row justify-content-around">
-      <label>Selected difficulty:</label>
-      <select class="form-control col-md-2" #selectDifficulty>
+  <div class='row justify-content-around'>
+    <label>Selected difficulty:</label>
+    <select #selectDifficulty (change)='generateText(selectDifficulty.value)' [disabled]='isTestInProgress' class='form-control col-md-2'>
         <option value='easy'>Easy</option>
         <option value='medium'>Medium</option>
         <option value='hard'>Hard</option>
       </select>
 
-      <button (click)='generateText(selectDifficulty.value)' class="generateNext btn btn-secondary col-md-3">Generate another paragraph</button>
+    <button (click)='generateText(selectDifficulty.value)' [disabled]='isTestInProgress' class='generateNext btn btn-secondary col-md-3'>Generate another paragraph</button>
   </div>
 
-  <div class="row justify-content-center">
-    <button class="startTest btn btn-success col-md-4">Start Test</button>
+  <div class='row justify-content-center'>
+    <button (click)='setTestStatus()' [ngClass]='{"btn-success btnStartText": !isTestInProgress, "btn-danger btnStopText": isTestInProgress}'
+      class='btn col-md-4'></button>
   </div>
-
 </div>

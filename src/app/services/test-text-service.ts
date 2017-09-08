@@ -1,11 +1,13 @@
+
 import { Injectable } from '@angular/core';
+import { TextBaseSplit } from './text-base-interface';
 
 @Injectable()
 export class TestTextService {
 
     private saveIndex: number;
 
-    public testTextBase = {
+    private testTextBase = {
         easy: [
             'easy test paragraph1',
             'easy test paragraph2',
@@ -18,21 +20,31 @@ export class TestTextService {
             'medium test paragraph3',
             'medium test paragraph4',
         ],
-        hard : [
+        hard: [
             'hard test paragraph1',
             'hard test paragraph2',
             'hard test paragraph3',
-            'hard test paragraph4',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum urna at enim ultrices blandit. Praesent ligula odio, bibendum eu imperdiet convallis, mollis quis ligula. Nulla condimentum vulputate odio a bibendum. Sed dapibus ligula felis. Cras hendrerit, nunc pretium ullamcorper luctus, ex ipsum aliquet mauris, eu mattis augue felis id enim. Cras eget rhoncus sapien. Cras ullamcorper risus id ipsum eleifend, a pharetra turpis tempor.',
         ],
     };
 
-    public getRandomTestText(difficulty: string): string {
+    public randomizeText(difficulty: string): string {
+
         const randomIndex = Math.floor(Math.random() * this.testTextBase[difficulty].length);
         if (randomIndex === this.saveIndex) {
-            return this.getRandomTestText(difficulty);
+            return this.randomizeText(difficulty);
         } else {
             this.saveIndex = randomIndex;
             return this.testTextBase[difficulty][randomIndex];
         }
+    }
+
+    public getRandomText(difficulty: string) {
+        const textSplit: TextBaseSplit[] = [];
+        const randomText = this.randomizeText(difficulty).split(' ');
+        for (let i = 0; i < randomText.length; i++) {
+            textSplit.push({word: randomText[i], current: false, completed: false, error: false});
+        }
+        return textSplit;
     }
 }
