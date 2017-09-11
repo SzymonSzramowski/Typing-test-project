@@ -17,11 +17,12 @@
 
     <div class='sideMenu col-md-4'>
       <div class="scores">
-        <div class="row">
-          <div ng-model='testTimer'>Test time: {{ getTimer() | date: 'mm:ss' }}</div>
+        <div class="row justify-content-between">
+          <span>Test time: {{ getTimer() }}</span>
+          <span>WPM: {{ getWPM() }}</span>
         </div>
       </div>
-      <div ngx-auto-scroll lock-y-offset="10" observe-attributes class="appConsole row">
+      <div ngx-auto-scroll lock-y-offset="10" class="appConsole row">
         <ul class='consoleListContainer'>
             <li *ngFor='let alert of getConsoleAlerts()' class='consoleMessage'>
               <span>{{ alert }}</span>

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs/Rx';
+import { DatePipe } from '@angular/common';
 
 import { TestTextService } from '../../services/test-text-service';
 import { ConsoleService } from '../../services/console-service';
@@ -28,12 +29,16 @@ export class MainComponent implements OnInit {
   @ViewChild('rewriteInput')
   private inputElement: ElementRef;
 
+  @ViewChild('selectDifficulty')
+  private selectElement: ElementRef;
+
   constructor(
 
     private testTextService: TestTextService,
     private consoleService: ConsoleService,
     private timerService: TimerService,
     private scoreService: ScoreService,
+    private datePipe: DatePipe,
 
   ) { }
 
@@ -54,7 +59,7 @@ export class MainComponent implements OnInit {
     if (this.isTestInProgress === false) {
 
       this.wordStatusReset();
-      this.timerService.resetTimer();
+      this.scoreService.resetStats();
       this.isTestInProgress = true;
       this.currentWordIndex = 0;
       setTimeout(() => this.lockInput(), 0);
@@ -85,9 +90,12 @@ export class MainComponent implements OnInit {
       return;
     }
 
+    this.scoreService.calculateWordsPerMinute(this.currentWordIndex);
+
     if (isLastWord && isCurrentWordCorrect) {
       this.currentTextArray[this.currentWordIndex].completed = true;
       this.currentTextArray[this.currentWordIndex].current = false;
+      this.scoreService.calculateScore(this.selectElement.nativeElement.value);
       this.testComplete();
 
     } else if (isCurrentWordCorrect) {
@@ -129,7 +137,7 @@ export class MainComponent implements OnInit {
   public testComplete(): void {
     this.isTestInProgress = false;
     this.timerService.stopTimer();
-    this.addConsoleAlert('Test completed');
+    this.addConsoleAlert('Test completed. Total score: ' + this.scoreService.score);
     this.currentWordIndex = 0;
     this.resetInput();
   }
@@ -184,7 +192,10 @@ export class MainComponent implements OnInit {
     this.isCountdownOn = false;
   }
 
-  public getTimer(): number {
-    return this.timerService.timer * 1000;
+  public getTimer(): string {
+    return this.datePipe.transform(this.timerService.timer * 1000, 'mm:ss');
+  }
+  public getWPM(): number {
+    return this.scoreService.wordsPerMin;
   }
 }
