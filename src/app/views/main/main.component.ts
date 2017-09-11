@@ -136,6 +136,7 @@ export class MainComponent implements OnInit {
 
   public testComplete(): void {
     this.isTestInProgress = false;
+    this.scoreService.saveScoreToStorage();
     this.timerService.stopTimer();
     this.addConsoleAlert('Test completed. Total score: ' + this.scoreService.score);
     this.currentWordIndex = 0;
