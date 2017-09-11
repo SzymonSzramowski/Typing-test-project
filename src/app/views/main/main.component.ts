@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Observable, Observer, Subscription } from 'rxjs/Rx';
+import { DatePipe } from '@angular/common';
+
 import { TestTextService } from '../../services/test-text-service';
 import { ConsoleService } from '../../services/console-service';
+import { TimerService } from '../../services/timer-service';
+import { ScoreService } from '../../services/score-service';
 
 @Component({
   selector: 'app-main',
@@ -13,17 +18,27 @@ export class MainComponent implements OnInit {
 
   public isTestInProgress = false;
 
+  public isCountdownOn = false;
+
   public inputError = false;
 
   private currentWordIndex: number;
 
+  private countdownSubscription: Subscription;
+
   @ViewChild('rewriteInput')
   private inputElement: ElementRef;
 
+  @ViewChild('selectDifficulty')
+  private selectElement: ElementRef;
+
   constructor(
 
-    public testTextService: TestTextService,
-    public consoleService: ConsoleService,
+    private testTextService: TestTextService,
+    private consoleService: ConsoleService,
+    private timerService: TimerService,
+    private scoreService: ScoreService,
+    private datePipe: DatePipe,
 
   ) { }
 
@@ -35,8 +50,7 @@ export class MainComponent implements OnInit {
 
   public generateText(difficulty): void {
 
-    const getText = this.testTextService.getRandomText(difficulty);
-    this.currentTextArray = getText;
+    this.currentTextArray = this.testTextService.getRandomText(difficulty);
 
   }
 
@@ -45,18 +59,22 @@ export class MainComponent implements OnInit {
     if (this.isTestInProgress === false) {
 
       this.wordStatusReset();
+      this.scoreService.resetStats();
       this.isTestInProgress = true;
       this.currentWordIndex = 0;
       setTimeout(() => this.lockInput(), 0);
       this.currentTextArray[0].current = true;
-      this.addConsoleAlert('Starting test');
+      this.startCountdown();
+
 
     } else {
 
       this.isTestInProgress = false;
       this.resetInput();
       this.wordStatusReset();
+      this.stopCountdown();
       this.addConsoleAlert('Test stopped');
+      this.timerService.stopTimer();
 
     }
   }
@@ -72,13 +90,13 @@ export class MainComponent implements OnInit {
       return;
     }
 
+    this.scoreService.calculateWordsPerMinute(this.currentWordIndex);
+
     if (isLastWord && isCurrentWordCorrect) {
       this.currentTextArray[this.currentWordIndex].completed = true;
       this.currentTextArray[this.currentWordIndex].current = false;
-      this.isTestInProgress = false;
-      this.addConsoleAlert('Test completed');
-      this.currentWordIndex = 0;
-      this.resetInput();
+      this.scoreService.calculateScore(this.selectElement.nativeElement.value);
+      this.testComplete();
 
     } else if (isCurrentWordCorrect) {
       this.currentTextArray[this.currentWordIndex].completed = true;
@@ -116,8 +134,16 @@ export class MainComponent implements OnInit {
 
   }
 
+  public testComplete(): void {
+    this.isTestInProgress = false;
+    this.timerService.stopTimer();
+    this.addConsoleAlert('Test completed. Total score: ' + this.scoreService.score);
+    this.currentWordIndex = 0;
+    this.resetInput();
+  }
+
   public getConsoleAlerts(): object {
-    return this.consoleService.consoleArray.reverse();
+    return this.consoleService.consoleArray;
   }
 
   private resetInput(): void {
@@ -143,4 +169,33 @@ export class MainComponent implements OnInit {
     }
   }
 
+  private startCountdown(): void {
+    this.isCountdownOn = true;
+    this.countdownSubscription = Observable.timer(0, 1000).subscribe((time: number) => {
+      // ToDo: Refactor 'else if' to switch
+      if (time === 0) {
+        this.addConsoleAlert('Starting test in 3...');
+      } else if (time === 1) {
+        this.addConsoleAlert('2...');
+      } else if (time === 2) {
+        this.addConsoleAlert('1...');
+      } else if (time === 3) {
+        this.isCountdownOn = false;
+        this.addConsoleAlert('GO!');
+        this.timerService.startTimer();
+      }
+    });
+  }
+
+  private stopCountdown(): void {
+    this.countdownSubscription.unsubscribe();
+    this.isCountdownOn = false;
+  }
+
+  public getTimer(): string {
+    return this.datePipe.transform(this.timerService.timer * 1000, 'mm:ss');
+  }
+  public getWPM(): number {
+    return this.scoreService.wordsPerMin;
+  }
 }
