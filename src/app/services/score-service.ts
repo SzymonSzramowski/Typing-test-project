@@ -37,11 +37,16 @@ export class ScoreService {
         this.timerService.timer = 0;
     }
 
-    public saveScoreToStorage(): void {
-        this.scoresArray.push({time: this.timerService.timer, wpm: this.wordsPerMin, score: this.score, date: Date.now()});
+    public saveScoreToStorage(selectedDifficulty): void {
+        this.scoresArray.push(
+            {
+                difficulty: selectedDifficulty,
+                time: this.timerService.timer,
+                wpm: this.wordsPerMin,
+                score: this.score,
+                date: Date.now()
+            });
         localStorage.setItem('type-test-scores', JSON.stringify(this.scoresArray));
 
-        console.log(JSON.parse(localStorage.getItem('type-test-scores')));
-        // this.scoresArray.push({time: this.timerService.timer, wpm: this.wordsPerMin, score: this.score});
     }
 }

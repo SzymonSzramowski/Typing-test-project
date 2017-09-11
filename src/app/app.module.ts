@@ -11,13 +11,15 @@ import { TestTextService } from './services/test-text-service';
 import { ConsoleService } from './services/console-service';
 import { TimerService } from './services/timer-service';
 import { ScoreService } from './services/score-service';
+import { ScoreboardComponent } from './views/scoreboard/scoreboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainComponent,
-    NgxAutoScroll
+    NgxAutoScroll,
+    ScoreboardComponent
   ],
   imports: [
     BrowserModule
