@@ -41,7 +41,6 @@ export class ScoreService {
         this.scoresArray.push(
             {
                 difficulty: selectedDifficulty,
-                time: this.timerService.timer,
                 wpm: this.wordsPerMin,
                 score: this.score,
                 date: Date.now()

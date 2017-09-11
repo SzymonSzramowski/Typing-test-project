@@ -143,7 +143,7 @@ export class MainComponent implements OnInit {
     this.resetInput();
   }
 
-  public getConsoleAlerts(): object {
+  public getConsoleMessages(): object {
     return this.consoleService.consoleArray;
   }
 
@@ -193,10 +193,10 @@ export class MainComponent implements OnInit {
     this.isCountdownOn = false;
   }
 
-  public getTimer(): string {
-    return this.datePipe.transform(this.timerService.timer * 1000, 'mm:ss');
+  public getTimer(): number {
+    return this.timerService.timer * 1000;
   }
-  public getWPM(): number {
+  public getWordsPerMinute(): number {
     return this.scoreService.wordsPerMin;
   }
 }

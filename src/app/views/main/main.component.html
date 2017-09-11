@@ -18,15 +18,15 @@
     <div class='sideMenu col-md-4'>
       <div class="scores">
         <div class="row justify-content-between">
-          <span>Test time: {{ getTimer() }}</span>
-          <span>WPM: {{ getWPM() }}</span>
+          <span>Test time: {{ getTimer() | date: 'mm:ss' }}</span>
+          <span>WPM: {{ getWordsPerMinute() }}</span>
         </div>
       </div>
       <div ngx-auto-scroll lock-y-offset="10" class="appConsole row">
         <ul class='consoleListContainer'>
-            <li *ngFor='let alert of getConsoleAlerts()' class='consoleMessage'>
-              <span>{{ alert }}</span>
-            </li>
+          <li *ngFor='let alert of getConsoleMessages()' class='consoleMessage'>
+            <span>{{ alert }}</span>
+          </li>
         </ul>
       </div>
       <div class="settings">
@@ -45,5 +45,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="row">
+    <button [routerLink]="['/home']" [disabled]='isTestInProgress' class='btn btn-primary'>Home</button>
+    <button [routerLink]="['/scoreboard']" [disabled]='isTestInProgress' class='btn btn-primary'>Score Board</button>
   </div>
 </div>
