@@ -1,5 +1,4 @@
 <div class='container'>
-
   <div class='row justify-content-between'>
     <div class='rewriteContainer col-md-7'>
       <div class='row'>
@@ -7,30 +6,28 @@
           <span *ngFor='let text of currentTextArray' [ngClass]='{"current": text.current, "complete": text.completed, "error": text.error}'>{{ text.word }} </span>
         </div>
       </div>
-
       <div class='row'>
         <input #rewriteInput on-keyup='checkLetter($event.keyCode, rewriteInput.value)' (blur)='lockInput()' [ngClass]='{"inputError": inputError}'
           [disabled]='!isTestInProgress' [readOnly]='isCountdownOn' type='text' placeholder='Type text here' class='typingInput form-control col-md-11'
         />
       </div>
     </div>
-
     <div class='sideMenu col-md-4'>
-      <div class="scores">
-        <div class="row justify-content-between">
+      <div class='scores'>
+        <div class='row justify-content-between'>
           <span>Test time: {{ getTimer() | date: 'mm:ss' }}</span>
           <span>WPM: {{ getWordsPerMinute() }}</span>
         </div>
       </div>
-      <div ngx-auto-scroll lock-y-offset="10" class="appConsole row">
+      <div ngx-auto-scroll lock-y-offset='10' class='appConsole row'>
         <ul class='consoleListContainer'>
           <li *ngFor='let alert of getConsoleMessages()' class='consoleMessage'>
             <span>{{ alert }}</span>
           </li>
         </ul>
       </div>
-      <div class="settings">
-        <div class="row">
+      <div class='settings'>
+        <div class='row'>
           <label>Choose difficulty:</label>
           <select #selectDifficulty (change)='generateText(selectDifficulty.value)' [disabled]='isTestInProgress' class='form-control'>
             <option value='easy'>Easy</option>
@@ -38,7 +35,7 @@
             <option value='hard'>Hard</option>
           </select>
         </div>
-        <div class="row justify-content-between">
+        <div class='row justify-content-between'>
           <button (click)='setTestStatus()' [ngClass]='{"btn-success btnStartText": !isTestInProgress, "btn-danger btnStopText": isTestInProgress}'
             class='btn col-md-5'></button>
           <button (click)='generateText(selectDifficulty.value)' [disabled]='isTestInProgress' class='generateNext btn btn-secondary'>Next paragraph</button>
@@ -46,7 +43,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class='row'>
     <button [routerLink]="['/home']" [disabled]='isTestInProgress' class='btn btn-primary'>Home</button>
     <button [routerLink]="['/scoreboard']" [disabled]='isTestInProgress' class='btn btn-primary'>Score Board</button>
   </div>

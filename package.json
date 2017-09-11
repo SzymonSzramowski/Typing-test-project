@@ -25,6 +25,7 @@
     "core-js": "^2.4.1",
     "ngx-auto-scroll": "^1.0.15",
     "rxjs": "^5.4.1",
+    "time-ago-pipe": "^1.2.1",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
