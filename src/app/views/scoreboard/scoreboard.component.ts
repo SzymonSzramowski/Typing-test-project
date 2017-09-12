@@ -18,7 +18,7 @@ export class ScoreboardComponent implements OnInit {
     scoreList.sort(function(a, b) {
       return parseFloat(b.score) - parseFloat(a.score);
   });
-    scoreList.splice(10);
+    scoreList.splice(20);
     return scoreList;
   }
 }

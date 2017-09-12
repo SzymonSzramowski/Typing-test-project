@@ -1,6 +1,21 @@
 <div class="container">
   <div class="row justify-content-center">
-    <button [routerLink]="['/main']" class='btn btn-primary'>Enter Test</button>
-    <button [routerLink]="['/scoreboard']" class='btn btn-primary'>Score Board</button>
+    <div class="titleContainer">
+      <h1>Typing Test Project</h1>
+      <h3>Rules:</h3>
+      <ul>
+        <li>Welcome! Click on the button below to begin Typing Test!</li>
+        <li>After clicking the start button you will have 3 seconds countdown before the test begins.</li>
+        <li>After countdown is done you will be locked on typing input.</li>
+        <li>Press space after typing the word correctly.</li>
+        <li>If you made an error on the current word, backspace out and fix your mistake!</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="navigate">
+      <button [routerLink]="['/main']" class='btn btn-dark'>Enter Test</button>
+      <button [routerLink]="['/scoreboard']" class='btn btn-dark'>Score Board</button>
+    </div>
   </div>
 </div>

@@ -1,27 +1,62 @@
+$primary-dark: #1e1e1e;
+$secondary-dark: #3a3a3a;
+$font-bright: #e0e0e0;
+
+@mixin button-style {
+    button{
+        margin-left: 40px;
+        margin-right: 40px;
+        width: 150px;
+        height: 80px;
+        background: rgba(30, 30, 30, 0.3);
+        border: 1px solid $font-bright;        
+    }
+    button:hover {
+        background: rgba(30, 30, 30, 0.8);
+        border: 1px solid #fff;
+        box-shadow: 0px 0px 24px 0px rgba(255,255,255,0.99);
+    }
+    button:disabled {
+        background: rgba(30, 30, 30, 0.8);
+        border: 1px solid #fff;
+        box-shadow: none;
+    }
+}
+@mixin container-style {
+    border-radius: .45rem;
+    background: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(255,255,255,0.5);  
+    color: $font-bright;
+
+}
+
 body {
-    background-color: #3a3a3a;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/assets/background.jpeg);
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
 }
 .row{
     padding-top: 15px;
     padding-bottom: 15px;
 }
 .rewriteContainer {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
+    @include container-style();
 }
 .testTextContainer{
     min-height: 340px;
 }
 
 .sideMenu {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
     height: 450px;
     padding-left: 25px;
     padding-right: 25px;
+    @include container-style();
 }
 .appConsole {
-    background-color: #3a3a3a;
+    @include container-style();
+    background-color: $secondary-dark;
     height: 200px;
     overflow-y: hidden;
     display: flex;
@@ -39,7 +74,7 @@ body {
     list-style: none;
 }
 .rewriteContainer input {
-    background-color: #1e1e1e;
+    background-color: $primary-dark;
 }
 .btnStartText:before {
     content: 'Start Test';
@@ -61,19 +96,42 @@ body {
     margin-right: 10px;
 }
 .typingInput:focus {
-    color: #fff;
-    background-color: #3a3a3a;
+    color: $font-bright;
+    background-color: $secondary-dark;
+    border: 1px solid #fff;
+    box-shadow: 0px 0px 24px 0px rgba(255,255,255,0.99);
 }
 .typingInput:disabled {
-    color: #fff;
-    background-color: #1e1e1e;
+    color: $font-bright;
+    background-color: $primary-dark;
 }
 .inputError:focus {
-    background-color: #dc3545;
     border-color: #dc3545;
-    color: #fff;
+    box-shadow: 0px 0px 24px 0px rgba(255, 0, 0, 0.99);
+    color: $font-bright;
 }
 .scoreList {
     list-style: none;
-    color: #e0e0e0;
+    color: $font-bright;
+}
+.titleContainer {
+    color: $font-bright;
+    h1 {
+        font-size: 80px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    h3 {
+        font-size: 35px;
+        padding-bottom: 30px;
+        text-align: center;
+    }
+    li {
+
+    }
+}
+
+.navigate {
+    padding-top: 50px;
+    @include button-style();
 }
