@@ -1,80 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
 body {
-    background-color: #3a3a3a;
-}
-.row{
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
+  background-color: #3a3a3a; }
+
+.row {
+  padding-top: 15px;
+  padding-bottom: 15px; }
+
 .rewriteContainer {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-}
-.testTextContainer{
-    min-height: 340px;
-}
+  background-color: #1e1e1e;
+  color: #e0e0e0; }
+
+.testTextContainer {
+  min-height: 340px; }
 
 .sideMenu {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-    height: 450px;
-    padding-left: 25px;
-    padding-right: 25px;
-}
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  height: 450px;
+  padding-left: 25px;
+  padding-right: 25px; }
+
 .appConsole {
-    background-color: #3a3a3a;
-    height: 200px;
-    overflow-y: hidden;
-    display: flex;
-}
+  background-color: #3a3a3a;
+  height: 200px;
+  overflow-y: hidden;
+  display: flex; }
+
 .appConsole:hover {
-    overflow-y: auto;
-}
+  overflow-y: auto; }
+
 .consoleListContainer {
-    padding: 0 20px;
-    width: 100%;
-    margin-top: auto;
-    margin-bottom: inherit;
-}
+  padding: 0 20px;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: inherit; }
+
 .consoleMessage {
-    list-style: none;
-}
+  list-style: none; }
+
 .rewriteContainer input {
-    background-color: #1e1e1e;
-}
+  background-color: #1e1e1e; }
+
 .btnStartText:before {
-    content: 'Start Test';
-}
+  content: 'Start Test'; }
+
 .btnStopText:before {
-    content: 'Stop Test';
-}
+  content: 'Stop Test'; }
+
 .error {
-    color: #e50000;
-}
+  color: #e50000; }
+
 .current {
-    font-weight: bold;
-}
+  font-weight: bold; }
+
 .complete {
-    color: #00ba31;
-}
+  color: #00ba31; }
+
 .typingInput {
-    margin-left: 10px;
-    margin-right: 10px;
-}
+  margin-left: 10px;
+  margin-right: 10px; }
+
 .typingInput:focus {
-    color: #fff;
-    background-color: #3a3a3a;
-}
+  color: #fff;
+  background-color: #3a3a3a; }
+
 .typingInput:disabled {
-    color: #fff;
-    background-color: #1e1e1e;
-}
+  color: #fff;
+  background-color: #1e1e1e; }
+
 .inputError:focus {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: #fff;
-}
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #fff; }
+
 .scoreList {
-    list-style: none;
-    color: #e0e0e0;
-}
+  list-style: none;
+  color: #e0e0e0; }
