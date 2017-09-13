@@ -4,6 +4,7 @@ import { NgxAutoScroll } from 'ngx-auto-scroll/lib/ngx-auto-scroll.directive';
 import { DatePipe } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './views/main/main.component';
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     TimerService,
     ScoreService,
     DatePipe,
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
 
   ],
   bootstrap: [AppComponent]
