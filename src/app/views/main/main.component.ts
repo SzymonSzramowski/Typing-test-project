@@ -79,11 +79,10 @@ export class MainComponent implements OnInit {
     }
   }
 
-  private checkWord(keyCode, inputValue: string): void {
+  private checkWord(event, keyCode, inputValue: string): void {
 
     const isLastWord = this.currentWordIndex === this.currentTextArray.length - 1;
-    const inputValueSufix = isLastWord ? '' : ' ';
-    const isCurrentWordCorrect = inputValue === this.currentTextArray[this.currentWordIndex].word + inputValueSufix;
+    const isCurrentWordCorrect = inputValue === this.currentTextArray[this.currentWordIndex].word;
     const spaceKeyCode = 32;
 
     if (keyCode !== spaceKeyCode && !isLastWord) {
@@ -104,13 +103,13 @@ export class MainComponent implements OnInit {
       this.currentTextArray[this.currentWordIndex + 1].current = true;
       this.currentWordIndex++;
       this.inputError = false;
+      event.preventDefault();
       this.resetInput();
-
     }
 
   }
 
-  public checkLetter(keyCode, inputValue: string): void {
+  public checkLetter(event, keyCode, inputValue: string): void {
 
     const currentText = this.currentTextArray[this.currentWordIndex].word;
 
@@ -121,7 +120,7 @@ export class MainComponent implements OnInit {
       this.currentTextArray[this.currentWordIndex].completed = false;
     }
 
-    if (inputValue !== currentText.substring(0, inputValue.length) && inputValue !== currentText + ' ') {
+    if (inputValue !== currentText.substring(0, inputValue.length)) {
       this.currentTextArray[this.currentWordIndex].error = true;
       this.inputError = true;
 
@@ -130,8 +129,13 @@ export class MainComponent implements OnInit {
       this.inputError = false;
     }
 
-    this.checkWord(keyCode, inputValue);
+    this.checkWord(event, keyCode, inputValue);
+  }
 
+  public checkLastWord(event, keyCode, inputValue: string): void {
+    if (this.currentWordIndex === this.currentTextArray.length - 1) {
+      this.checkWord(event, keyCode, inputValue);
+    }
   }
 
   public testComplete(): void {
