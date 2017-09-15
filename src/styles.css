@@ -1,76 +1,156 @@
-/* You can add global styles to this file, and also import other style files */
 body {
-    background-color: #3a3a3a;
-}
-.row{
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(/assets/background.jpeg);
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%; }
+
+.row {
+  padding-top: 15px;
+  padding-bottom: 15px; }
+
 .rewriteContainer {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-}
-.testTextContainer{
-    min-height: 340px;
-}
+  border-radius: .45rem;
+  background: rgba(30, 30, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #e0e0e0; }
+
+.testTextContainer {
+  min-height: 340px;
+  font-size: 20px;
+  vertical-align: center;
+  position: relative; }
+  .testTextContainer div {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); }
 
 .sideMenu {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-    height: 450px;
-    padding-left: 25px;
-    padding-right: 25px;
-}
+  height: 450px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: .45rem;
+  background: rgba(30, 30, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #e0e0e0; }
+
 .appConsole {
-    background-color: #3a3a3a;
-    height: 200px;
-    overflow-y: hidden;
-    display: flex;
-}
-.appConsole:hover {
-    overflow-y: auto;
-}
+  border-radius: .45rem;
+  background: rgba(30, 30, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #e0e0e0;
+  background-color: rgba(58, 58, 58, 0.35);
+  height: 200px;
+  overflow-y: hidden;
+  display: flex; }
+  .appConsole:hover {
+    overflow-y: auto; }
+
 .consoleListContainer {
-    padding: 0 20px;
-    width: 100%;
-    margin-top: auto;
-    margin-bottom: inherit;
-}
+  padding: 0 20px;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: inherit; }
+
 .consoleMessage {
-    list-style: none;
-}
+  list-style: none; }
+
 .rewriteContainer input {
-    background-color: #1e1e1e;
-}
+  background-color: #1e1e1e; }
+
 .btnStartText:before {
-    content: 'Start Test';
-}
+  content: 'Start Test'; }
+
 .btnStopText:before {
-    content: 'Stop Test';
-}
+  content: 'Stop Test'; }
+
 .error {
-    color: #e50000;
-}
+  color: #e50000; }
+
 .current {
-    font-weight: bold;
-}
+  font-weight: bold; }
+
 .complete {
-    color: #00ba31;
-}
+  color: #00ba31; }
+
 .typingInput {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-.typingInput:focus {
-    color: #fff;
-    background-color: #3a3a3a;
-}
-.typingInput:disabled {
-    color: #fff;
-    background-color: #1e1e1e;
-}
+  margin-left: 10px;
+  margin-right: 10px; }
+  .typingInput:focus {
+    color: #e0e0e0;
+    background-color: rgba(58, 58, 58, 0.35);
+    border: 1px solid #fff;
+    box-shadow: 0px 0px 24px 0px rgba(255, 255, 255, 0.99); }
+  .typingInput:disabled {
+    color: #e0e0e0;
+    background-color: #1e1e1e; }
+
 .inputError:focus {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: #fff;
-}
+  border-color: #dc3545;
+  box-shadow: 0px 0px 24px 0px rgba(255, 0, 0, 0.99);
+  color: #e0e0e0; }
+
+.scoreList {
+  list-style: none;
+  color: #e0e0e0; }
+
+.titleContainer {
+  color: #e0e0e0;
+  text-shadow: 1px 1px 5px #000000; }
+  .titleContainer h1 {
+    font-size: 80px;
+    padding-top: 50px;
+    padding-bottom: 50px; }
+  .titleContainer h3 {
+    font-size: 35px;
+    padding-bottom: 30px;
+    text-align: center; }
+  .titleContainer li {
+    padding-bottom: 10px; }
+
+.tableContainer table {
+  color: #e0e0e0;
+  border-collapse: inherit;
+  border-spacing: 0 1.2em; }
+
+.tableContainer thead th {
+  text-align: center; }
+
+.tableContainer thead th:first-child {
+  text-align: left; }
+
+.tableContainer tbody tr {
+  background: rgba(30, 30, 30, 0.8);
+  text-align: center; }
+
+.tableContainer tbody th,
+.tableContainer tbody td {
+  padding: 1.4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+
+.tableContainer .tableLeftSide {
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: .45rem 0 0 .45rem; }
+
+.tableContainer .tableRightSide {
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0 .45rem .45rem 0; }
+
+.navigate {
+  padding-top: 50px; }
+  .navigate button {
+    margin-left: 40px;
+    margin-right: 40px;
+    width: 150px;
+    height: 80px;
+    background: rgba(30, 30, 30, 0.3);
+    border: 1px solid #e0e0e0; }
+    .navigate button:hover {
+      background: rgba(30, 30, 30, 0.8);
+      border: 1px solid #fff;
+      box-shadow: 0px 0px 24px 0px rgba(255, 255, 255, 0.99); }
+    .navigate button:disabled {
+      background: rgba(30, 30, 30, 0.8);
+      border: 1px solid #fff;
+      box-shadow: none; }

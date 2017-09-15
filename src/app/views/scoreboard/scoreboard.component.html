@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="tableContainer">
+      <div class="row">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Total score:</th>
+                <th>Words per minute:</th>
+                <th>Difficulty:</th>
+                <th>Date:</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let score of getScoreList(), let i = index'>
+                <th class='tableLeftSide'>{{ i + 1 }}</th>
+                <td>{{ score.score }}</td>
+                <td>{{ score.wpm }}</td>
+                <td>{{ score.difficulty }}</td>
+                <td class='tableRightSide'>{{ score.date | timeAgo }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="navigate">
+      <button [routerLink]="['/home']" class='btn btn-dark'>Home</button>
+      <button [routerLink]="['/main']" class='btn btn-dark'>Enter Test</button>
+    </div>
+  </div>
+</div>
